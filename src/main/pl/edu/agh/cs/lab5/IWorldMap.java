@@ -1,4 +1,4 @@
-package pl.edu.agh.cs.lab4;
+package pl.edu.agh.cs.lab5;
 
 import pl.edu.agh.cs.lab2.*;
 
