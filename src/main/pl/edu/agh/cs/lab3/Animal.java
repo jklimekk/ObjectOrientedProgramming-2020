@@ -30,8 +30,6 @@ public class Animal implements IMapElement {
         this.map = map;
     }
 
-
-
     @Override
     public String toString() {
         return switch (this.orientation) {

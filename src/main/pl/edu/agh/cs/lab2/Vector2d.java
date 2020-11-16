@@ -1,7 +1,5 @@
 package pl.edu.agh.cs.lab2;
 
-import java.util.Objects;
-
 public class Vector2d {
     final public int x;
     final public int y;
@@ -62,8 +60,12 @@ public class Vector2d {
         return this.x == that.x && this.y == that.y;
     }
 
+    @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        int hash = 13;
+        hash += this.x * 31;
+        hash += this.y * 17;
+        return hash;
     }
 
     public Vector2d opposite() {
