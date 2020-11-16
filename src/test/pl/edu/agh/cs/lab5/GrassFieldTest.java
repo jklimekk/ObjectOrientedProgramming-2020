@@ -3,7 +3,9 @@ package pl.edu.agh.cs.lab5;
 import org.junit.jupiter.api.Test;
 import pl.edu.agh.cs.lab2.MoveDirection;
 import pl.edu.agh.cs.lab2.Vector2d;
+import pl.edu.agh.cs.lab3.Animal;
 import pl.edu.agh.cs.lab3.OptionsParser;
+import pl.edu.agh.cs.lab4.IWorldMap;
 
 import java.util.List;
 import java.util.Optional;

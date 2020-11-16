@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import pl.edu.agh.cs.lab2.MapDirection;
 import pl.edu.agh.cs.lab2.MoveDirection;
 import pl.edu.agh.cs.lab2.Vector2d;
+import pl.edu.agh.cs.lab4.RectangularMap;
 
 import java.util.List;
 
@@ -14,46 +15,46 @@ class AnimalTest {
     @Test
     void moveRight() {
         // given
-        Animal zwierze = new Animal();
+        Animal zwierze = new Animal(new RectangularMap(4,4));
         MoveDirection direction = MoveDirection.RIGHT;
 
         // when
         zwierze.move(direction);
 
         // then
-        assertEquals(MapDirection.EAST, zwierze.getOrientacja());
+        assertEquals(MapDirection.EAST, zwierze.getOrientation());
     }
 
     @Test
     void moveLeft() {
         // given
-        Animal zwierze = new Animal();
+        Animal zwierze = new Animal(new RectangularMap(4,4));
         MoveDirection direction = MoveDirection.LEFT;
 
         // when
         zwierze.move(direction);
 
         // then
-        assertEquals(MapDirection.WEST, zwierze.getOrientacja());
+        assertEquals(MapDirection.WEST, zwierze.getOrientation());
     }
 
     @Test
     void moveForward() {
         // given
-        Animal zwierze = new Animal();
+        Animal zwierze = new Animal(new RectangularMap(4,4));
         MoveDirection direction = MoveDirection.FORWARD;
 
         // when
         zwierze.move(direction);
 
         // then
-        assertEquals(new Vector2d(2, 3), zwierze.getPolozenie());
+        assertEquals(new Vector2d(2, 3), zwierze.getPosition());
     }
 
     @Test
     void moveForwardTooFar() {
         // given
-        Animal zwierze = new Animal();
+        Animal zwierze = new Animal(new RectangularMap(4,4));
         MoveDirection direction = MoveDirection.FORWARD;
 
         // when
@@ -62,26 +63,26 @@ class AnimalTest {
         zwierze.move(direction);
 
         // then
-        assertEquals(new Vector2d(2, 4), zwierze.getPolozenie());
+        assertEquals(new Vector2d(2, 4), zwierze.getPosition());
     }
 
     @Test
     void moveBackward() {
         // given
-        Animal zwierze = new Animal();
+        Animal zwierze = new Animal(new RectangularMap(4,4));
         MoveDirection direction = MoveDirection.BACKWARD;
 
         // when
         zwierze.move(direction);
 
         // then
-        assertEquals(new Vector2d(2, 1), zwierze.getPolozenie());
+        assertEquals(new Vector2d(2, 1), zwierze.getPosition());
     }
 
     @Test
     void moveBackwardTooFar() {
         // given
-        Animal zwierze = new Animal();
+        Animal zwierze = new Animal(new RectangularMap(4,4));
         MoveDirection direction = MoveDirection.BACKWARD;
 
         // when
@@ -90,13 +91,13 @@ class AnimalTest {
         zwierze.move(direction);
 
         // then
-        assertEquals(new Vector2d(2, 0), zwierze.getPolozenie());
+        assertEquals(new Vector2d(2, 0), zwierze.getPosition());
     }
 
     @Test
     void calosciowyZeZlymiDanymi() {
         // błędne ciagi znaków + wychodzenie poza tablice
-        Animal zwierze = new Animal();
+        Animal zwierze = new Animal(new RectangularMap(4,4));
         String[] args = new String[] {"f", "l", "a", "b", "b", "r", "r", "f", "g", "f"};
 
         OptionsParser parser = new OptionsParser();
@@ -115,14 +116,14 @@ class AnimalTest {
             zwierze.move(ruch);
 
             // czy zwierzę ma właściwą orientację
-            assertEquals(orientacja.get(i), zwierze.getOrientacja());
+            assertEquals(orientacja.get(i), zwierze.getOrientation());
 
             //czy zwierzę przemieszcza się na właściwe pozycje
-            assertEquals(polozenie.get(i), zwierze.getPolozenie());
+            assertEquals(polozenie.get(i), zwierze.getPosition());
 
             //czy zwierzę nie wychodzi poza mapę
-            assertTrue(zwierze.getPolozenie().precedes(new Vector2d(4, 4)));
-            assertTrue(zwierze.getPolozenie().follows(new Vector2d(0, 0)));
+            assertTrue(zwierze.getPosition().precedes(new Vector2d(4, 4)));
+            assertTrue(zwierze.getPosition().follows(new Vector2d(0, 0)));
 
             i++;
         }
@@ -130,7 +131,7 @@ class AnimalTest {
 
     @Test
     void calosciowyDlaDobrychDanych() {
-        Animal zwierze = new Animal();
+        Animal zwierze = new Animal(new RectangularMap(4,4));
         String[] args = new String[] {"l", "f", "r", "b", "r", "f", "f", "r"};
 
         OptionsParser parser = new OptionsParser();
@@ -149,14 +150,14 @@ class AnimalTest {
             zwierze.move(ruch);
 
             // czy zwierzę ma właściwą orientację
-            assertEquals(orientacja.get(i), zwierze.getOrientacja());
+            assertEquals(orientacja.get(i), zwierze.getOrientation());
 
             //czy zwierzę przemieszcza się na właściwe pozycje
-            assertEquals(polozenie.get(i), zwierze.getPolozenie());
+            assertEquals(polozenie.get(i), zwierze.getPosition());
 
             //czy zwierzę nie wychodzi poza mapę
-            assertTrue(zwierze.getPolozenie().precedes(new Vector2d(4, 4)));
-            assertTrue(zwierze.getPolozenie().follows(new Vector2d(0, 0)));
+            assertTrue(zwierze.getPosition().precedes(new Vector2d(4, 4)));
+            assertTrue(zwierze.getPosition().follows(new Vector2d(0, 0)));
 
             i++;
         }

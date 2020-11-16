@@ -27,11 +27,9 @@ public class Vector2d {
     public Vector2d upperRight(Vector2d other) {
         int x, y;
 
-        if ( this.x > other.x) x = this.x;
-        else x = other.x;
+        x = Math.max(this.x, other.x);
 
-        if ( this.y > other.y) y = this.y;
-        else y = other.y;
+        y = Math.max(this.y, other.y);
 
         return new Vector2d(x,y);
     }
@@ -39,11 +37,9 @@ public class Vector2d {
     public Vector2d lowerLeft(Vector2d other) {
         int x, y;
 
-        if ( this.x < other.x) x = this.x;
-        else x = other.x;
+        x = Math.min(this.x, other.x);
 
-        if ( this.y < other.y) y = this.y;
-        else y = other.y;
+        y = Math.min(this.y, other.y);
 
         return new Vector2d(x,y);
     }

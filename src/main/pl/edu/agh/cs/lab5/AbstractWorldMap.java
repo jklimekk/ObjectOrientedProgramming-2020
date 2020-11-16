@@ -2,6 +2,9 @@ package pl.edu.agh.cs.lab5;
 
 import pl.edu.agh.cs.lab2.MoveDirection;
 import pl.edu.agh.cs.lab2.Vector2d;
+import pl.edu.agh.cs.lab3.Animal;
+import pl.edu.agh.cs.lab4.IWorldMap;
+import pl.edu.agh.cs.lab4.MapVisualiser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +13,7 @@ import java.util.Optional;
 public abstract class AbstractWorldMap implements IWorldMap {
 
     protected List<Animal> animals = new ArrayList<>();
-    protected MapVisualiser mv = new MapVisualiser(this);
+    private final MapVisualiser mv = new MapVisualiser(this);
 
     @Override
     public boolean place(Animal animal) {

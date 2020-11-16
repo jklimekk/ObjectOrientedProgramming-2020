@@ -1,6 +1,7 @@
 package pl.edu.agh.cs.lab4;
 
 import pl.edu.agh.cs.lab2.*;
+import pl.edu.agh.cs.lab3.Animal;
 
 import java.util.List;
 import java.util.Optional;

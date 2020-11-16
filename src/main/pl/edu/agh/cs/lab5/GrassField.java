@@ -1,6 +1,7 @@
 package pl.edu.agh.cs.lab5;
 
 import pl.edu.agh.cs.lab2.Vector2d;
+import pl.edu.agh.cs.lab3.Animal;
 
 import java.util.*;
 
@@ -9,7 +10,7 @@ import static java.lang.Math.sqrt;
 public class GrassField extends AbstractWorldMap {
     private List<Grass> grasses = new ArrayList<>();
 
-    Random generator = new Random();
+    private static final Random generator = new Random();
 
     public GrassField(int number) {
         generateGrass(number);
@@ -18,7 +19,7 @@ public class GrassField extends AbstractWorldMap {
     private void generateGrass(int number){
         Vector2d v;
 
-        while(grasses.size() < 10){
+        while(grasses.size() < number){
             v = new Vector2d(generator.nextInt((int) sqrt(number*10))+1, generator.nextInt((int) sqrt(number*10))+1);
 
             Grass grass = new Grass(v);

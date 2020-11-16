@@ -26,8 +26,8 @@ class Vector2dTest {
         Vector2d w = new Vector2d(1, 1);
 
         // when
-        Boolean result1 = v.precedes(u);
-        Boolean result2 = v.precedes(w);
+        boolean result1 = v.precedes(u);
+        boolean result2 = v.precedes(w);
 
         // then
         assertTrue(result1);
@@ -42,8 +42,8 @@ class Vector2dTest {
         Vector2d w = new Vector2d(1, 1);
 
         // when
-        Boolean result1 = v.follows(u);
-        Boolean result2 = v.follows(w);
+        boolean result1 = v.follows(u);
+        boolean result2 = v.follows(w);
 
         // then
         assertFalse(result1);
@@ -110,8 +110,8 @@ class Vector2dTest {
         Vector2d w = new Vector2d(2, 2);
 
         // when
-        Boolean result1 = v.equals(u);
-        Boolean result2 = v.equals(w);
+        boolean result1 = v.equals(u);
+        boolean result2 = v.equals(w);
 
         // then
         assertTrue(result1);

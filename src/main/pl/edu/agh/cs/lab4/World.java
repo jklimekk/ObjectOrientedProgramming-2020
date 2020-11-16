@@ -2,6 +2,7 @@ package pl.edu.agh.cs.lab4;
 
 import pl.edu.agh.cs.lab2.MoveDirection;
 import pl.edu.agh.cs.lab2.Vector2d;
+import pl.edu.agh.cs.lab3.Animal;
 import pl.edu.agh.cs.lab3.OptionsParser;
 
 import java.util.List;
