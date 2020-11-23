@@ -1,7 +1,6 @@
 package pl.edu.agh.cs.lab5;
 
 import pl.edu.agh.cs.lab2.Vector2d;
-import pl.edu.agh.cs.lab3.Animal;
 
 import java.util.*;
 
@@ -28,27 +27,11 @@ public class GrassField extends AbstractWorldMap {
             HashSet<Grass> set = new HashSet<>(grasses);
             grasses = new ArrayList<>(set);
         }
-    }
 
-    @Override
-    public Vector2d[] corners(){
-        Vector2d lowerLeftCorner = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
-        Vector2d upperRightCorner = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
-
-        Vector2d position;
-
-        for(Animal animal : animals) {
-            position = animal.getPosition();
-            lowerLeftCorner = position.lowerLeft(lowerLeftCorner);
-            upperRightCorner = position.upperRight(upperRightCorner);
-        }
         for(Grass grass : grasses) {
-            position = grass.getPosition();
-            lowerLeftCorner = position.lowerLeft(lowerLeftCorner);
-            upperRightCorner = position.upperRight(upperRightCorner);
+            mapBoundary.addElement(grass);
         }
 
-        return new Vector2d[] {lowerLeftCorner, upperRightCorner};
     }
 
     @Override

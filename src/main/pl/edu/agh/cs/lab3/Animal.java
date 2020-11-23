@@ -3,11 +3,17 @@ package pl.edu.agh.cs.lab3;
 import pl.edu.agh.cs.lab2.*;
 import pl.edu.agh.cs.lab4.IWorldMap;
 import pl.edu.agh.cs.lab5.IMapElement;
+import pl.edu.agh.cs.lab7.IPositionChangeObserver;
+import pl.edu.agh.cs.lab7.IPositionChangedPublisher;
 
-public class Animal implements IMapElement {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Animal implements IMapElement, IPositionChangedPublisher {
     private MapDirection orientation;
     private Vector2d position;
     public IWorldMap map;
+    private final List<IPositionChangeObserver> observators= new ArrayList<>();
 
     @Override
     public Vector2d getPosition() {
@@ -19,9 +25,7 @@ public class Animal implements IMapElement {
     }
 
     public Animal(IWorldMap map) {
-        this.orientation = MapDirection.NORTH;
-        this.position = new Vector2d(2,2);
-        this.map = map;
+        this(map, new Vector2d(2,2));
     }
 
     public Animal(IWorldMap map, Vector2d initialPosition) {
@@ -47,15 +51,35 @@ public class Animal implements IMapElement {
             case FORWARD -> {
                 Vector2d temp = this.position.add(this.orientation.toUnitVector());
 
-                if(map.canMoveTo(temp))
+                if(map.canMoveTo(temp)) {
+                    positionChanged(this.position, temp);
                     this.position = temp;
+                }
             }
             case BACKWARD -> {
                 Vector2d temp = this.position.subtract(this.orientation.toUnitVector());
 
-                if(map.canMoveTo(temp))
+                if(map.canMoveTo(temp)) {
+                    positionChanged(this.position, temp);
                     this.position = temp;
+                }
             }
+        }
+    }
+
+    @Override
+    public void addObserver(IPositionChangeObserver observer) {
+        observators.add(observer);
+    }
+
+    @Override
+    public void removeObserver(IPositionChangeObserver observer) {
+        observators.remove(observer);
+    }
+
+    private void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        for(IPositionChangeObserver observator : observators) {
+            observator.positionChanged(this, oldPosition, newPosition);
         }
     }
 }

@@ -16,9 +16,4 @@ public class RectangularMap extends AbstractWorldMap {
     public boolean canMoveTo(Vector2d position) {
         return !(isOccupied(position)) && position.precedes(corner2) && position.follows(corner1);
     }
-
-    @Override
-    public Vector2d[] corners() {
-        return new Vector2d[] {corner1, corner2};
-    }
 }

@@ -5,20 +5,28 @@ import pl.edu.agh.cs.lab2.Vector2d;
 import pl.edu.agh.cs.lab3.Animal;
 import pl.edu.agh.cs.lab4.IWorldMap;
 import pl.edu.agh.cs.lab4.MapVisualiser;
+import pl.edu.agh.cs.lab7.IPositionChangeObserver;
+import pl.edu.agh.cs.lab7.MapBoundary;
 
 import java.util.*;
 
-public abstract class AbstractWorldMap implements IWorldMap {
+public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
 
     protected List<Animal> animals = new ArrayList<>();
     protected Map<Vector2d, Animal> animalsHash = new HashMap<>();
     private final MapVisualiser mv = new MapVisualiser(this);
+    protected MapBoundary mapBoundary = new MapBoundary();
 
     @Override
     public boolean place(Animal animal) {
         if(canMoveTo(animal.getPosition())) {
             animals.add(animal);
             animalsHash.put(animal.getPosition(), animal);
+
+            animal.addObserver(this);
+            animal.addObserver(mapBoundary);
+            mapBoundary.addElement(animal);
+
             return true;
         } else {
             throw new IllegalArgumentException("You can't place animal at: " + animal.getPosition());
@@ -35,17 +43,7 @@ public abstract class AbstractWorldMap implements IWorldMap {
             // wydaje mi się że gdybyśmy wykorzystywali values() zgubilibyśmy kolejność zwierząt
             // (która jest ważna przy ich poruszaniu) przez usuwanie i dodawanie wartości do hashmapy
 
-            Vector2d beforePosition = animal.getPosition();
-
             animal.move(direction);
-
-            Vector2d afterPosition = animal.getPosition();
-
-            // sprawdzenie czy się ruszył
-            if(! (beforePosition.equals(afterPosition))) {
-                animalsHash.remove(beforePosition);
-                animalsHash.put(afterPosition, animal);
-            }
 
             i++;
             i %= animalsNumber;
@@ -65,14 +63,15 @@ public abstract class AbstractWorldMap implements IWorldMap {
         return Optional.empty();
     }
 
-    protected abstract Vector2d[] corners();
-
     @Override
     public String toString() {
-        Vector2d lowerLeftCorner = corners()[0];
-        Vector2d upperRightCorner = corners()[1];
+        return mv.draw(mapBoundary.loverLeftCorner(), mapBoundary.upperRightCorner());
+    }
 
-        return mv.draw(lowerLeftCorner, upperRightCorner);
+    @Override
+    public void positionChanged(IMapElement movedElement, Vector2d oldPosition, Vector2d newPosition) {
+        animalsHash.remove(oldPosition);
+        animalsHash.put(newPosition, (Animal) movedElement);
     }
 
 }
