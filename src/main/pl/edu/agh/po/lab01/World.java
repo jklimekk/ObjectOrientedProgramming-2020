@@ -9,18 +9,10 @@ public class World {
         for(Direction arg : args) {
 
             switch (arg) {
-                case f:
-                    System.out.println("Zwierzak idzie do przodu");
-                    break;
-                case b:
-                    System.out.println("Zwierzak idzie do tyłu");
-                    break;
-                case r:
-                    System.out.println("Zwierzak idzie w prawo");
-                    break;
-                case l:
-                    System.out.println("Zwierzak idzie w lewo");
-                    break;
+                case f -> System.out.println("Zwierzak idzie do przodu");
+                case b -> System.out.println("Zwierzak idzie do tyłu");
+                case r -> System.out.println("Zwierzak idzie w prawo");
+                case l -> System.out.println("Zwierzak idzie w lewo");
             }
         }
     }
@@ -33,18 +25,10 @@ public class World {
 
         for(String arg : args) {
             switch (arg) {
-                case "f":
-                    argss[i] = Direction.f;
-                    break;
-                case "b":
-                    argss[i] = Direction.b;
-                    break;
-                case "r":
-                    argss[i] = Direction.r;
-                    break;
-                case "l":
-                    argss[i] = Direction.l;
-                    break;
+                case "f" -> argss[i] = Direction.f;
+                case "b" -> argss[i] = Direction.b;
+                case "r" -> argss[i] = Direction.r;
+                case "l" -> argss[i] = Direction.l;
             }
 
             i += 1;

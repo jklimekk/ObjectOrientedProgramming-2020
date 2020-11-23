@@ -57,10 +57,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
 
     @Override
     public Optional<Object> objectAt(Vector2d position) {
-        if(animalsHash.containsKey(position)) {
-            return Optional.of(animalsHash.get(position));
-        }
-        return Optional.empty();
+        return Optional.ofNullable(animalsHash.get(position));
     }
 
     @Override

@@ -98,10 +98,16 @@ class AnimalTest {
     void calosciowyZeZlymiDanymi() {
         // błędne ciagi znaków + wychodzenie poza tablice
         Animal zwierze = new Animal(new RectangularMap(4,4));
-        String[] args = new String[] {"f", "l", "a", "b", "b", "r", "r", "f", "g", "f"};
+        String[] args1 = new String[] {"f", "l", "a", "b", "b", "r", "r", "f", "g", "f"};
 
         OptionsParser parser = new OptionsParser();
-        List<MoveDirection> ruchy = parser.parse(args);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            List<MoveDirection> ruchy = parser.parse(args1);
+        });
+
+        String[] args2 = new String[] {"f", "l", "b", "b", "r", "r", "f", "f"};
+        List<MoveDirection> ruchy = parser.parse(args2);
 
         // czy dane wejściowe podane jako tablica łańcuchów znaków są poprawnie interpretowane
         assertEquals(ruchy, List.of(MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.BACKWARD, MoveDirection.BACKWARD,

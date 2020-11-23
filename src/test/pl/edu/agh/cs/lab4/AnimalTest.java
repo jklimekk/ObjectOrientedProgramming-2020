@@ -51,11 +51,11 @@ class AnimalTest {
         assertTrue(map.place(new Animal(map,new Vector2d(2,3))));
 
         // wstawianie poza zakres mapy
-        assertFalse(map.place(new Animal(map,new Vector2d(11,3))));
-        assertFalse(map.place(new Animal(map,new Vector2d(1,-3))));
+        assertThrows(IllegalArgumentException.class, () -> map.place(new Animal(map,new Vector2d(11,3))));
+        assertThrows(IllegalArgumentException.class, () -> map.place(new Animal(map,new Vector2d(1,-3))));
 
         // wstawianie w zajęte już miejsce
-        assertFalse(map.place(new Animal(map,new Vector2d(2,3))));
+        assertThrows(IllegalArgumentException.class, () -> map.place(new Animal(map,new Vector2d(11,3))));
 
         // zwierzęta będą próbować wchodzić na siebie i wychodzić poza mapę
         map.run(directions);

@@ -51,7 +51,7 @@ class RectangularMapTest {
     void placePozaMape() {
         IWorldMap map = new RectangularMap(3, 4);
 
-        assertFalse(map.place(new Animal(map, new Vector2d(5, 1))));
+        assertThrows(IllegalArgumentException.class, () -> map.place(new Animal(map, new Vector2d(5, 1))));
     }
 
     @Test
@@ -59,7 +59,7 @@ class RectangularMapTest {
         IWorldMap map = new RectangularMap(3, 4);
         map.place(new Animal(map, new Vector2d(1, 1)));
 
-        assertFalse(map.place(new Animal(map, new Vector2d(1, 1))));
+        assertThrows(IllegalArgumentException.class, () -> map.place(new Animal(map, new Vector2d(1, 1))));
     }
 
     @Test
@@ -132,8 +132,14 @@ class RectangularMapTest {
         map.place(new Animal(map,new Vector2d(2,3)));
 
 
-        String[] args = new String[] {"f", "A", "l", "f", "l", "F", "f", "f", "f", "f", "Ala ma kota"};
-        List<MoveDirection> directions = new OptionsParser().parse(args);
+        String[] args1 = new String[] {"f", "A", "l", "f", "l", "F", "f", "f", "f", "f", "Ala ma kota"};
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            List<MoveDirection> badDirections = new OptionsParser().parse(args1);
+        });
+
+        String[] args2 = new String[] {"f", "l", "f", "l", "f", "f", "f", "f"};
+        List<MoveDirection> directions = new OptionsParser().parse(args2);
 
         // poprawna interpretacja danych wejsciowych
         assertEquals(directions, List.of(MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.FORWARD, MoveDirection.LEFT,
